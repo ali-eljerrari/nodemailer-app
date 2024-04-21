@@ -1,0 +1,61 @@
+<h1>Login Page</h1>
+
+<form
+  enctype="application/x-www-form-urlencoded"
+  id="email-form"
+  name="email-form"
+  role="form">
+  <input
+    type="text"
+    name="email"
+    placeholder="Email"
+    value="" />
+
+  <input
+    type="text"
+    name="password"
+    placeholder="Password"
+    value="" />
+
+  <input
+    type="submit"
+    value="Submit" />
+</form>
+<a href="/email">Email</a>
+
+<script>
+  // Get the form element
+  var form = document.getElementById('email-form');
+
+  // Add submit event listener to the form
+  form.addEventListener('submit', async function (event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+
+    const { email, password } = event.target;
+
+    await fetch('/login', {
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        if (data.token) {
+          sessionStorage.setItem('token', data.token);
+          window.location.href = '/email';
+        }
+        // alert('Logged in to the application successfully!');
+      })
+      .catch(err => alert(err));
+  });
+</script>

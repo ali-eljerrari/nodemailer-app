@@ -1,0 +1,68 @@
+<h1>Email Page</h1>
+
+<form
+  enctype="application/x-www-form-urlencoded"
+  id="email-form"
+  name="email-form"
+  role="form">
+  <input
+    type="text"
+    name="email"
+    placeholder="Target Email"
+    value="" />
+
+  <input
+    type="text"
+    name="subject"
+    placeholder="Subject of Email"
+    value="" />
+
+  <input
+    type="text"
+    name="message"
+    placeholder="Body of Email"
+    value="" />
+
+  <input
+    type="submit"
+    value="Submit" />
+</form>
+
+<a href="/">Login</a>
+
+<script>
+  // Get the form element
+  var form = document.getElementById('email-form');
+
+  // Add submit event listener to the form
+  form.addEventListener('submit', async function (event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+
+    const { email, subject, message } = event.target;
+
+    // console.log(sessionStorage.getItem('token'));
+
+    await fetch('/send-email', {
+      body: JSON.stringify({
+        email: email.value,
+        subject: subject.value,
+        message: message.value
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: sessionStorage.getItem('token')
+      },
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        alert('Email sent successfully!');
+      })
+      .catch(err => alert(err));
+  });
+</script>
