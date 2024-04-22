@@ -1,4 +1,3 @@
-```
 # Nodemailer Express.js App
 
 This is a simple Express.js application that demonstrates how to use Nodemailer for sending emails.
