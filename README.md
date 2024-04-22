@@ -6,22 +6,24 @@ This is a simple Express.js application that demonstrates how to use Nodemailer 
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/nodemailer-express-app.git
+   git clone https://github.com/ali-eljerrari/nodemailer-app.git
    ```
 
 2. Navigate into the project directory:
    ```bash
-   cd nodemailer-express-app
+   cd nodemailer-app
    ```
 
 3. Install dependencies:
    ```bash
    npm install
+   or
+   yarn install
    ```
 
 ## Configuration
 
-1. Open the `config.js` file and update the `mailOptions` object with your email configuration details such as `service`, `auth.user`, `auth.pass`, `from`, etc.
+1. Open the `./src/app.ts` file and update the `mailOptions` object with your email configuration details such as `service`, `user`, `pass`, `from`, etc.
 
 2. If you are using a service like Gmail, you may need to allow less secure apps to access your account. Alternatively, you can set up an app-specific password.
 
@@ -29,7 +31,7 @@ This is a simple Express.js application that demonstrates how to use Nodemailer 
 
 1. Start the application:
    ```bash
-   npm start
+   npm run dev
    ```
 
 2. Open your web browser and navigate to `http://localhost:3000`.
